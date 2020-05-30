@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AuthController@index');
+
+Route::match(['get', 'post'], '/auth/callback', 'AuthController@callback');
+
+Route::get('/logout', 'AuthController@logout');
