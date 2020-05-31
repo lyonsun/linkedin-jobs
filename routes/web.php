@@ -18,3 +18,5 @@ Route::get('/', 'AuthController@index');
 Route::match(['get', 'post'], '/auth/callback', 'AuthController@callback');
 
 Route::get('/logout', 'AuthController@logout');
+
+Route::get('/jobs', 'Jobs');

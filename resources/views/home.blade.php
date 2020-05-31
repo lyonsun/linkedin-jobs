@@ -7,7 +7,17 @@
   <title>Home</title>
 </head>
 <body>
-  <h1>Home page</h1>
+  <div class="image-box">
+    <div>
+      <img src="{{ $profile_image }}" alt="linkedin_profile_image" class="img-rounded">
+    </div>
+  </div>
+  
+  <h1>Hello {{ $full_name }}</h1>
+
+  <div>
+    <a href="{{ url('/jobs') }}">Jobs</a>
+  </div>
 
   <div>
     <a href="{{ url('/logout') }}">Logout</a>

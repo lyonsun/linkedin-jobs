@@ -44,7 +44,21 @@ class AuthController extends Controller
     }
     else
     {
-      return view('home');
+      $linkedin_access_token = $request->session()->get('linkedin_access_token');
+      $linkedin_member_profile_url = 'https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))';
+
+      $response = Http::withToken($linkedin_access_token)->get($linkedin_member_profile_url);
+
+      $linkedin_profile_response = $response->json();
+      
+      $full_name = $response['firstName']['localized']['en_US'] . ' ' . $response['lastName']['localized']['en_US'];
+      $profile_image = $response['profilePicture']['displayImage~']['elements'][0]['identifiers'][0]['identifier'];
+
+      $data = [
+        'full_name' => $full_name,
+        'profile_image' => $profile_image,
+      ];
+      return view('home', $data);
     }
   }
 
